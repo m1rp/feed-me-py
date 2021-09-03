@@ -14,11 +14,11 @@ feeds = [feedparser.parse(url)["entries"] for url in urls]
 simplified_feeds = []
 for index, feed in enumerate(feeds):
     simplified_feeds.append([])
-    for i,f in enumerate(feed):
-        # look into this part more
+    for f in feed:
+        content = f.description if f.description else f.content[0].value
         simplified_feeds[index].append({
             'title':f.title,
-            'content': markdownify(f.content[0].value),
+            'content': markdownify(content),
             'link':f.link,
             "updated":f.updated
             })
